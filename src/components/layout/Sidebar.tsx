@@ -33,6 +33,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     { icon: UserPlus, label: 'Onboarding', path: '/admin/onboarding' },
     { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
     { icon: Users, label: 'Members', path: '/admin/members' },
+    { icon: Users, label: 'Staff', path: '/admin/staff' },
     { icon: Wallet, label: 'Deposits', path: '/admin/deposits' },
     { icon: CreditCard, label: 'Loans', path: '/admin/loans' },
     { icon: Receipt, label: 'Transactions', path: '/admin/transactions' },

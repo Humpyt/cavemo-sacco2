@@ -1,3 +1,24 @@
+export interface Staff {
+  id: string;
+  employeeId: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: string;
+  department: 'Loans' | 'Member Services' | 'Operations' | 'Management' | 'IT';
+  status: 'Active' | 'On Leave' | 'Inactive';
+  hireDate: string;
+  salary: number;
+  performanceScore: number;
+  profileImage: string;
+  address: string;
+  nssfNumber: string;
+  bank: {
+    name: string;
+    accountNumber: string;
+  };
+}
+
 export interface User {
   id: string;
   email: string;
@@ -47,6 +68,7 @@ export interface Transaction {
   memberId: string;
   accountId?: string;
   loanId?: string;
+  staffId?: string; // ID of staff who processed the transaction
   type: 'deposit' | 'withdrawal' | 'loan_payment' | 'fine' | 'checkoff' | 'transfer';
   amount: number;
   description: string;
@@ -147,6 +169,7 @@ export interface MemberOnboarding {
 export interface Deposit {
   id: string;
   memberId: string;
+  staffId?: string; // ID of staff who processed the deposit
   category: 'savings' | 'fixed' | 'special';
   amount: number; // UGX
   date: string;
@@ -275,4 +298,4 @@ export interface BankAccount {
   balance: number; // UGX
   lastReconciledAt?: string;
   status: 'active' | 'closed';
-}
+}

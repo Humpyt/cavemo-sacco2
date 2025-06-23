@@ -133,15 +133,23 @@ export const AdminDashboard: React.FC = () => {
         <div>
           <h1 className="text-2xl font-bold text-secondary-900">Admin Dashboard</h1>
           <p className="text-secondary-600 mt-1">
-            Welcome back! Here's what's happening at Kawempe SACCO today.
+            Welcome back! Here's what's happening at Cavemo SACCO today.
           </p>
         </div>
         <div className="flex space-x-3">
-          <Button variant="success" size="sm">
+          <Button 
+            variant="success" 
+            size="sm"
+            onClick={() => window.location.href = '/admin/onboarding'}
+          >
             <UserPlus className="h-4 w-4 mr-2" />
             Add Member
           </Button>
-          <Button variant="info" size="sm">
+          <Button 
+            variant="info" 
+            size="sm"
+            onClick={() => window.location.href = '/admin/reports'}
+          >
             <TrendingUp className="h-4 w-4 mr-2" />
             View Reports
           </Button>

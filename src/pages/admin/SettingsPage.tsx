@@ -30,11 +30,11 @@ import { Skeleton } from '../../components/ui/Skeleton';
 // --- Mock Data ---
 
 const mockUsers = [
-  { id: 'usr1', name: 'Admin User', email: 'admin@kawempesacco.com', role: 'Admin', status: 'Active' },
-  { id: 'usr2', name: 'Jane Manager', email: 'jane.m@kawempesacco.com', role: 'Manager', status: 'Active' },
-  { id: 'usr3', name: 'Peter Loan', email: 'peter.l@kawempesacco.com', role: 'Loan Officer', status: 'Active' },
-  { id: 'usr4', name: 'Grace Cashier', email: 'grace.c@kawempesacco.com', role: 'Cashier', status: 'Inactive' },
-  { id: 'usr5', name: 'Sam Member', email: 'sam.m@kawempesacco.com', role: 'Member Services', status: 'Active' },
+  { id: 'usr1', name: 'Admin User', email: 'admin@cavemosacco.com', role: 'Admin', status: 'Active' },
+  { id: 'usr2', name: 'Jane Manager', email: 'jane.m@cavemosacco.com', role: 'Manager', status: 'Active' },
+  { id: 'usr3', name: 'Peter Loan', email: 'peter.l@cavemosacco.com', role: 'Loan Officer', status: 'Active' },
+  { id: 'usr4', name: 'Grace Cashier', email: 'grace.c@cavemosacco.com', role: 'Cashier', status: 'Inactive' },
+  { id: 'usr5', name: 'Sam Member', email: 'sam.m@cavemosacco.com', role: 'Member Services', status: 'Active' },
 ];
 
 const permissions = {
@@ -245,7 +245,7 @@ const SaccoConfiguration = ({ onSave }: any) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-secondary-700 mb-1">SACCO Name</label>
-              <input type="text" defaultValue="Kawempe SACCO" className="w-full px-3 py-2 border border-secondary-300 rounded-lg" />
+              <input type="text" defaultValue="Cavemo SACCO" className="w-full px-3 py-2 border border-secondary-300 rounded-lg" />
             </div>
             <div>
               <label className="block text-sm font-medium text-secondary-700 mb-1">Registration No.</label>
@@ -257,7 +257,7 @@ const SaccoConfiguration = ({ onSave }: any) => {
             </div>
             <div>
               <label className="block text-sm font-medium text-secondary-700 mb-1">Contact Email</label>
-              <input type="email" defaultValue="contact@kawempesacco.com" className="w-full px-3 py-2 border border-secondary-300 rounded-lg" />
+              <input type="email" defaultValue="contact@cavemosacco.com" className="w-full px-3 py-2 border border-secondary-300 rounded-lg" />
             </div>
           </div>
         </div>
@@ -342,7 +342,7 @@ const NotificationSettings = ({ onSave }: any) => {
             </div>
             <div>
               <label className="block text-sm font-medium text-secondary-700 mb-1">Username</label>
-              <input type="text" defaultValue="kawempe-sacco" className="w-full px-3 py-2 border border-secondary-300 rounded-lg" />
+              <input type="text" defaultValue="cavemo-sacco" className="w-full px-3 py-2 border border-secondary-300 rounded-lg" />
             </div>
           </div>
         </div>

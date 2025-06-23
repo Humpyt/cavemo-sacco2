@@ -71,7 +71,7 @@ export const Login: React.FC = () => {
               <PiggyBank className="h-8 w-8 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-secondary-900 tracking-tight">Kawempe</h1>
+              <h1 className="text-3xl font-bold text-secondary-900 tracking-tight">Cavemo</h1>
               <p className="text-lg text-secondary-600 font-medium">SACCO</p>
             </div>
           </div>
@@ -158,7 +158,7 @@ export const Login: React.FC = () => {
           <div className="mt-6 p-4 bg-secondary-50/80 backdrop-blur-sm rounded-lg border border-secondary-100">
             <p className="text-sm text-secondary-600 font-medium mb-2">Demo Credentials:</p>
             <p className="text-xs text-secondary-500">
-              Admin: admin@kawempesacco.com / password123<br />
+              Admin: admin@cavemosacco.com / password123<br />
               Member: john.doe@gmail.com / password123
             </p>
           </div>
@@ -169,7 +169,7 @@ export const Login: React.FC = () => {
           "text-center text-xs text-secondary-500 transition-all duration-700 delay-1000",
           isAnimated ? "translate-y-0 opacity-70" : "translate-y-4 opacity-0"
         )}>
-          © 2025 Kawempe SACCO. All rights reserved.
+          © 2025 Cavemo SACCO. All rights reserved.
         </p>
       </div>
     </div>

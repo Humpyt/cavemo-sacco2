@@ -15,6 +15,9 @@ interface Transaction {
   status: 'pending' | 'completed' | 'failed';
   reference: string;
   channel: 'cash' | 'bank' | 'mobile_money' | 'checkoff';
+  staffId: string;
+  staffName: string;
+  staffRole: string;
 }
 
 const mockTransactions: Transaction[] = [
@@ -29,6 +32,9 @@ const mockTransactions: Transaction[] = [
     status: 'completed',
     reference: 'TXN001',
     channel: 'mobile_money',
+    staffId: 'stf3',
+    staffName: 'Grace Cashier',
+    staffRole: 'Head Cashier',
   },
   {
     id: '2',
@@ -41,6 +47,9 @@ const mockTransactions: Transaction[] = [
     status: 'completed',
     reference: 'TXN002',
     channel: 'checkoff',
+    staffId: 'stf2',
+    staffName: 'Peter Loan',
+    staffRole: 'Senior Loan Officer',
   },
   {
     id: '3',
@@ -53,6 +62,9 @@ const mockTransactions: Transaction[] = [
     status: 'completed',
     reference: 'TXN003',
     channel: 'bank',
+    staffId: 'stf3',
+    staffName: 'Grace Cashier',
+    staffRole: 'Head Cashier',
   },
   {
     id: '4',
@@ -65,6 +77,9 @@ const mockTransactions: Transaction[] = [
     status: 'pending',
     reference: 'TXN004',
     channel: 'cash',
+    staffId: 'stf1',
+    staffName: 'Jane Manager',
+    staffRole: 'General Manager',
   },
   {
     id: '5',
@@ -77,6 +92,9 @@ const mockTransactions: Transaction[] = [
     status: 'completed',
     reference: 'TXN005',
     channel: 'mobile_money',
+    staffId: 'stf1',
+    staffName: 'Jane Manager',
+    staffRole: 'General Manager',
   },
   {
     id: '6',
@@ -89,6 +107,9 @@ const mockTransactions: Transaction[] = [
     status: 'failed',
     reference: 'TXN006',
     channel: 'checkoff',
+    staffId: 'stf2',
+    staffName: 'Peter Loan',
+    staffRole: 'Senior Loan Officer',
   },
 ];
 
@@ -295,6 +316,7 @@ export const TransactionsPage: React.FC = () => {
                 <th className="text-left py-3 px-4 font-medium text-secondary-900">Channel</th>
                 <th className="text-left py-3 px-4 font-medium text-secondary-900">Date</th>
                 <th className="text-left py-3 px-4 font-medium text-secondary-900">Status</th>
+                <th className="text-left py-3 px-4 font-medium text-secondary-900">Staff</th>
               </tr>
             </thead>
             <tbody>
@@ -344,6 +366,12 @@ export const TransactionsPage: React.FC = () => {
                     <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(transaction.status)}`}>
                       {transaction.status}
                     </span>
+                  </td>
+                  <td className="py-4 px-4">
+                    <div>
+                      <p className="font-medium text-secondary-900">{transaction.staffName}</p>
+                      <p className="text-sm text-secondary-600">{transaction.staffRole}</p>
+                    </div>
                   </td>
                 </tr>
               ))}

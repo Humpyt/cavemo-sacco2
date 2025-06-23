@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, Plus, Filter, MoreHorizontal, Edit, Trash2, Eye, UserCheck, UserX } from 'lucide-react';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
@@ -81,6 +82,7 @@ const mockMembers: Member[] = [
 ];
 
 export const MembersPage: React.FC = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [showDropdown, setShowDropdown] = useState<string | null>(null);
@@ -128,7 +130,7 @@ export const MembersPage: React.FC = () => {
             Manage SACCO members and their information
           </p>
         </div>
-        <Button>
+        <Button onClick={() => navigate('/admin/onboarding')}>
           <Plus className="h-4 w-4 mr-2" />
           Add Member
         </Button>
@@ -281,6 +283,7 @@ export const MembersPage: React.FC = () => {
           <p className="text-sm text-secondary-600">Total Members</p>
         </Card>
       </div>
+
     </div>
   );
 };

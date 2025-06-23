@@ -41,6 +41,7 @@ interface Loan {
   collateralRequired: boolean;
   phoneNumber: string;
   nationalId: string;
+  staffId?: string; // ID of staff who processed the loan
 }
 
 const mockLoans: Loan[] = [
@@ -65,6 +66,7 @@ const mockLoans: Loan[] = [
     guarantors: ['Sarah Nakato', 'Robert Mugisha'],
     purpose: 'Farm expansion and equipment purchase',
     collateralRequired: true,
+    staffId: 'stf2', // Processed by Peter Loan
   },
   {
     id: '2',
@@ -87,6 +89,7 @@ const mockLoans: Loan[] = [
     guarantors: ['John Mukasa'],
     purpose: 'Medical emergency expenses',
     collateralRequired: false,
+    staffId: 'stf2', // Processed by Peter Loan
   },
   {
     id: '3',
@@ -109,6 +112,7 @@ const mockLoans: Loan[] = [
     guarantors: ['Grace Auma', 'David Okello'],
     purpose: 'Retail shop expansion',
     collateralRequired: true,
+    staffId: 'stf2', // Processed by Peter Loan
   },
   {
     id: '4',
@@ -129,6 +133,7 @@ const mockLoans: Loan[] = [
     guarantors: ['John Mukasa', 'Sarah Nakato'],
     purpose: 'University tuition fees',
     collateralRequired: false,
+    staffId: 'stf1', // Submitted by Jane Manager
   },
   {
     id: '5',
@@ -151,6 +156,7 @@ const mockLoans: Loan[] = [
     guarantors: ['Robert Mugisha'],
     purpose: 'Construction project',
     collateralRequired: true,
+    staffId: 'stf2', // Processed by Peter Loan
   },
 ];
 
@@ -261,7 +267,7 @@ export const LoansPage: React.FC = () => {
 
   const handleExport = () => {
     const csvContent = [
-      ['Member Name', 'Member Number', 'Loan Type', 'Principal Amount', 'Outstanding Balance', 'Status', 'Next Payment Date'],
+      ['Member Name', 'Member Number', 'Loan Type', 'Principal Amount', 'Outstanding Balance', 'Status', 'Processed By', 'Next Payment Date'],
       ...filteredLoans.map(loan => [
         `"${loan.memberName}"`,
         loan.memberNumber,
@@ -269,6 +275,7 @@ export const LoansPage: React.FC = () => {
         loan.principalAmount.toString(),
         loan.outstandingBalance.toString(),
         loan.status,
+        loan.staffId ? (loan.staffId === 'stf1' ? 'Jane Manager' : 'Peter Loan') : 'Not assigned',
         loan.nextPaymentDate ? format(parseISO(loan.nextPaymentDate), 'yyyy-MM-dd') : 'N/A'
       ])
     ].map(row => row.join(',')).join('\n');
@@ -303,6 +310,7 @@ export const LoansPage: React.FC = () => {
       guarantors: [newLoanApplication.guarantor1, newLoanApplication.guarantor2].filter(Boolean),
       purpose: newLoanApplication.purpose,
       collateralRequired: newLoanApplication.loanType === 'development' || newLoanApplication.loanType === 'business',
+      staffId: 'stf1', // In a real app, this would be the logged-in staff's ID
     };
     
     setLoans([newLoan, ...loans]);
@@ -489,6 +497,7 @@ export const LoansPage: React.FC = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase">Amount</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase">Outstanding</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase">Processed By</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase">Actions</th>
               </tr>
             </thead>
@@ -535,6 +544,17 @@ export const LoansPage: React.FC = () => {
                       <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(loan.status)}`}>
                         {loan.status}
                       </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {loan.staffId ? (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          {loan.staffId === 'stf1' ? 'Jane Manager' : 'Peter Loan'}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                          Not assigned
+                        </span>
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex gap-2">

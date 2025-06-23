@@ -17,6 +17,11 @@ interface Report {
 export const ReportsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [reports, setReports] = useState<Report[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [reportType, setReportType] = useState('financial');
+  const [reportDate, setReportDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [reportFormat, setReportFormat] = useState('pdf');
+  const [filterType, setFilterType] = useState('all');
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,6 +55,41 @@ export const ReportsPage: React.FC = () => {
       setIsLoading(false);
     }, 800);
   }, []);
+
+  const handleGenerateReport = () => {
+    setIsGenerating(true);
+    
+    // Simulate report generation
+    setTimeout(() => {
+      const newReport: Report = {
+        id: `rpt-${reports.length + 1}`,
+        name: `${reportType === 'financial' ? 'Financial Statement' : 
+               reportType === 'membership' ? 'Membership Report' :
+               reportType === 'loans' ? 'Loans Analysis' : 'Deposits Summary'} - ${format(new Date(reportDate), 'MMM yyyy')}`,
+        type: reportType as any,
+        generatedAt: new Date().toISOString(),
+        generatedBy: 'Admin User',
+        status: 'ready'
+      };
+      
+      setReports([newReport, ...reports]);
+      setIsGenerating(false);
+      alert(`Report generated successfully!`);
+    }, 2000);
+  };
+
+  const handleDownloadReport = (reportId: string) => {
+    const report = reports.find(r => r.id === reportId);
+    if (report) {
+      alert(`Downloading ${report.name} in ${reportFormat.toUpperCase()} format`);
+      // In a real app, this would trigger an actual download
+      console.log(`Downloading report ${reportId}`);
+    }
+  };
+
+  const filteredReports = filterType === 'all' 
+    ? reports 
+    : reports.filter(r => r.type === filterType);
 
   return (
     <div className="p-6">
@@ -126,22 +166,36 @@ export const ReportsPage: React.FC = () => {
         </div>
         <div className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <select className="px-3 py-2 border border-secondary-300 rounded-lg">
-              <option>Financial Statement</option>
-              <option>Membership Report</option>
-              <option>Loans Analysis</option>
-              <option>Deposits Summary</option>
+            <select 
+              className="px-3 py-2 border border-secondary-300 rounded-lg"
+              value={reportType}
+              onChange={(e) => setReportType(e.target.value)}
+            >
+              <option value="financial">Financial Statement</option>
+              <option value="membership">Membership Report</option>
+              <option value="loans">Loans Analysis</option>
+              <option value="deposits">Deposits Summary</option>
             </select>
             <input
               type="date"
               className="px-3 py-2 border border-secondary-300 rounded-lg"
-              defaultValue={format(new Date(), 'yyyy-MM-dd')}
+              value={reportDate}
+              onChange={(e) => setReportDate(e.target.value)}
             />
-            <select className="px-3 py-2 border border-secondary-300 rounded-lg">
-              <option>PDF Format</option>
-              <option>Excel Format</option>
+            <select 
+              className="px-3 py-2 border border-secondary-300 rounded-lg"
+              value={reportFormat}
+              onChange={(e) => setReportFormat(e.target.value)}
+            >
+              <option value="pdf">PDF Format</option>
+              <option value="excel">Excel Format</option>
             </select>
-            <Button>Generate Report</Button>
+            <Button 
+              onClick={handleGenerateReport}
+              disabled={isGenerating}
+            >
+              {isGenerating ? 'Generating...' : 'Generate Report'}
+            </Button>
           </div>
         </div>
       </Card>
@@ -185,7 +239,11 @@ export const ReportsPage: React.FC = () => {
                       </span>
                     </td>
                     <td className="px-4 py-3">
-                      <Button size="sm" variant="outline">
+                      <Button 
+                        size="sm" 
+                        variant="outline"
+                        onClick={() => handleDownloadReport(report.id)}
+                      >
                         <Download className="h-4 w-4 mr-1" />
                         Download
                       </Button>
