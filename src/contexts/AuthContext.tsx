@@ -14,7 +14,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const mockUsers: User[] = [
   {
     id: '1',
-    email: 'admin@kawempesacco.com',
+    email: 'admin@cavemosacco.com',
     firstName: 'Admin',
     lastName: 'User',
     role: 'admin',

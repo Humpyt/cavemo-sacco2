@@ -156,7 +156,7 @@ export const Login: React.FC = () => {
           </form>
 
           <div className="mt-6 p-4 bg-secondary-50/80 backdrop-blur-sm rounded-lg border border-secondary-100">
-            <p className="text-sm text-secondary-600 font-medium mb-2">Demo Credentials:</p>
+            <p className="text-sm text-secondary-600 font-medium mb-2">Working Credentials:</p>
             <p className="text-xs text-secondary-500">
               Admin: admin@cavemosacco.com / password123<br />
               Member: john.doe@gmail.com / password123
