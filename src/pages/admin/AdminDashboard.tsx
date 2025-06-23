@@ -145,14 +145,6 @@ export const AdminDashboard: React.FC = () => {
             <UserPlus className="h-4 w-4 mr-2" />
             Add Member
           </Button>
-          <Button 
-            variant="info" 
-            size="sm"
-            onClick={() => window.location.href = '/admin/reports'}
-          >
-            <TrendingUp className="h-4 w-4 mr-2" />
-            View Reports
-          </Button>
         </div>
       </Card>
 
