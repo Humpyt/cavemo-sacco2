@@ -8,7 +8,7 @@ interface StatCardProps {
   value: string;
   change?: string;
   changeType?: 'positive' | 'negative' | 'neutral';
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
   iconColor?: string;
   isImportant?: boolean;
   animationDelay?: number;
@@ -111,25 +111,34 @@ export const StatCard: React.FC<StatCardProps> = ({
       >
         <div className="flex items-center justify-between p-5">
           <div className="flex-1 space-y-2">
-            <p className="text-sm font-medium text-secondary-600 tracking-wide uppercase">{title}</p>
-            <p className="text-2xl font-bold text-secondary-900 tracking-tight">{displayValue}</p>
+            <p className="text-[10px] font-medium text-secondary-500 tracking-wide uppercase whitespace-nowrap">{title}</p>
+            <p className="text-md font-bold text-secondary-900 tracking-tight">
+              {displayValue.includes('USh') ? (
+                <>
+                  <span className="text-sm">{displayValue.replace('USh', '').trim()}</span>
+                  <span className="text-[10px] ml-1">USh</span>
+                </>
+              ) : (
+                displayValue
+              )}
+            </p>
             {change && (
-              <div className="flex items-center space-x-1 mt-2">
-                <span className={`text-sm font-medium ${changeColors[changeType]}`}>
+              <div className="flex items-center space-x-1 mt-1">
+                <span className={`text-xs font-medium ${changeColors[changeType]}`}>
                   {changeIcons[changeType]}
                 </span>
-                <span className={`text-sm ${changeColors[changeType]}`}>
+                <span className={`text-xs ${changeColors[changeType]}`}>
                   {change}
                 </span>
               </div>
             )}
           </div>
-          <div className={clsx(
-            'p-4 rounded-xl transition-all duration-300 group-hover:scale-110',
+            <div className={clsx(
+            'p-3 rounded-xl transition-all duration-300 group-hover:scale-110',
             gradientClass
           )}>
             <Icon className={clsx(
-              'h-7 w-7 transition-transform duration-300',
+              'h-5 w-5 transition-transform duration-300',
               iconColor,
               'group-hover:scale-110 group-hover:rotate-3'
             )} />

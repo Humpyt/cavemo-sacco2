@@ -16,7 +16,9 @@ import {
   Banknote,
   Smartphone,
   PieChart,
-  X
+  X,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/Button';
@@ -24,9 +26,11 @@ import { Button } from '../ui/Button';
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  collapsed: boolean;
+  toggleCollapse: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, collapsed, toggleCollapse }) => {
   const { user } = useAuth();
 
   const adminNavItems = [
@@ -38,7 +42,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     { icon: CreditCard, label: 'Loans', path: '/admin/loans' },
     { icon: Receipt, label: 'Transactions', path: '/admin/transactions' },
     { icon: AlertTriangle, label: 'Fines', path: '/admin/fines' },
-    { icon: Banknote, label: 'Checkoffs', path: '/admin/checkoffs' },
     { icon: Smartphone, label: 'E-Wallets', path: '/admin/e-wallets' },
     { icon: TrendingUp, label: 'Investments', path: '/admin/investments' },
     { icon: FileText, label: 'Reports', path: '/admin/reports' },
@@ -72,32 +75,49 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       )}
 
       {/* Sidebar - Fixed positioning for consistent alignment */}
-      <div className={`
-        fixed left-0 top-0 h-full w-64 bg-white border-r border-secondary-200 transform transition-transform duration-300 z-50
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-        md:translate-x-0
-      `}>
-        <div className="flex items-center justify-between p-6 border-b border-secondary-200">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-              <PiggyBank className="h-6 w-6 text-white" />
+        <div className={`
+          fixed left-0 top-0 h-full bg-white border-r border-secondary-200 transform transition-all duration-300 z-50
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${collapsed ? 'w-20' : 'w-64'}
+          md:translate-x-0
+        `}>
+          <div className="flex items-center justify-between p-4 border-b border-secondary-200">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+                <PiggyBank className="h-6 w-6 text-white" />
+              </div>
+              {!collapsed && (
+                <div>
+                  <h1 className="text-lg font-bold text-secondary-900">Cavemo</h1>
+                  <p className="text-xs text-secondary-500">SACCO</p>
+                </div>
+              )}
             </div>
-            <div>
-              <h1 className="text-lg font-bold text-secondary-900">Kawempe</h1>
-              <p className="text-xs text-secondary-500">SACCO</p>
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleCollapse}
+                className="hidden md:flex"
+              >
+                {collapsed ? (
+                  <ChevronRight className="h-5 w-5" />
+                ) : (
+                  <ChevronLeft className="h-5 w-5" />
+                )}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onClose}
+                className="md:hidden"
+              >
+                <X className="h-5 w-5" />
+              </Button>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="md:hidden"
-          >
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
 
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2 overflow-y-auto h-[calc(100%-80px)]">
           {navItems.map((item) => (
             <NavLink
               key={item.path}
@@ -111,8 +131,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 }`
               }
             >
-              <item.icon className="h-5 w-5" />
-              <span className="font-medium">{item.label}</span>
+              <item.icon className={`h-5 w-5 ${collapsed ? 'mx-auto' : ''}`} />
+              {!collapsed && <span className="font-medium">{item.label}</span>}
             </NavLink>
           ))}
         </nav>

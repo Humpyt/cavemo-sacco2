@@ -9,13 +9,30 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem('sidebar-collapsed');
+    return saved === 'true';
+  });
+
+  const toggleCollapse = () => {
+    const newState = !collapsed;
+    setCollapsed(newState);
+    localStorage.setItem('sidebar-collapsed', String(newState));
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <div className="flex flex-1">
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <Sidebar 
+          isOpen={sidebarOpen} 
+          onClose={() => setSidebarOpen(false)}
+          collapsed={collapsed}
+          toggleCollapse={toggleCollapse}
+        />
         
-        <div className="flex-1 flex flex-col md:ml-64">
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${
+          collapsed ? 'md:ml-20' : 'md:ml-64'
+        }`}>
           <Header onMenuToggle={() => setSidebarOpen(true)} />
           
           <main className="flex-1 bg-gray-50">

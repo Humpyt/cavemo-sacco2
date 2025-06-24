@@ -120,14 +120,14 @@ export const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       {/* Header Card */}
       <Card
         variant="gradient"
         interactive
         glow
         gradientDirection="diagonal"
-        className="flex items-center justify-between mb-6"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 sm:mb-6"
         padding="lg"
       >
         <div>
