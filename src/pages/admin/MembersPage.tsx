@@ -130,10 +130,6 @@ export const MembersPage: React.FC = () => {
             Manage SACCO members and their information
           </p>
         </div>
-        <Button onClick={() => navigate('/admin/onboarding')}>
-          <Plus className="h-4 w-4 mr-2" />
-          Add Member
-        </Button>
       </div>
 
       {/* Filters */}

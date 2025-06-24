@@ -136,16 +136,6 @@ export const AdminDashboard: React.FC = () => {
             Welcome back! Here's what's happening at Cavemo SACCO today.
           </p>
         </div>
-        <div className="flex space-x-3">
-          <Button 
-            variant="success" 
-            size="sm"
-            onClick={() => window.location.href = '/admin/onboarding'}
-          >
-            <UserPlus className="h-4 w-4 mr-2" />
-            Add Member
-          </Button>
-        </div>
       </Card>
 
       {/* Financial Stats Grid */}
